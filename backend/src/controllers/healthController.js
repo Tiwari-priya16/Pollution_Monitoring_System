@@ -1,5 +1,4 @@
 const { getDBStatus } = require('../config/db');
-
 /**
  * @desc   Check API and Database health
  * @route  GET /api/health
@@ -7,7 +6,6 @@ const { getDBStatus } = require('../config/db');
  */
 const getHealthStatus = (req, res) => {
   const dbStatus = getDBStatus();
-
   return res.status(200).json({
     success: true,
     status: 'operational',
@@ -24,5 +22,4 @@ const getHealthStatus = (req, res) => {
     environment: process.env.NODE_ENV || 'development'
   });
 };
-
 module.exports = { getHealthStatus };

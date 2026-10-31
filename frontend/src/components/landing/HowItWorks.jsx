@@ -58,7 +58,7 @@ export default function HowItWorks() {
             return (
               <div 
                 key={item.step}
-                className="relative bg-white p-7 rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
+                className="relative bg-white p-7 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">

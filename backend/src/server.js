@@ -64,5 +64,33 @@ const server = app.listen(PORT, () => {
   console.log(`[Server] Health check available at: http://localhost:${PORT}/api/health`);
 });
 
+// Handle Port Conflict and Server Errors Gracefully
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n❌ [Server Error] Port ${PORT} is already in use by another process.`);
+    console.error(`👉 Action steps to resolve:`);
+    console.error(`   1. If another instance of this backend is already running, you can reuse it.`);
+    console.error(`   2. If you want to use a different port, update 'PORT=${PORT}' in 'backend/.env' (e.g. PORT=5001)`);
+    console.error(`      and update 'VITE_API_BASE_URL=http://localhost:5001/api' in 'frontend/.env'.`);
+    console.error(`   3. To free up port ${PORT}, terminate the process using: Stop-Process -Id (Get-NetTCPConnection -LocalPort ${PORT}).OwningProcess\n`);
+    process.exit(1);
+  } else {
+    console.error(`[Server Error] Server failed to start:`, err.message);
+    process.exit(1);
+  }
+});
+
+// Graceful Shutdown
+const gracefulShutdown = () => {
+  console.log('\n[Server] Shutting down gracefully...');
+  server.close(() => {
+    console.log('[Server] HTTP server closed.');
+    process.exit(0);
+  });
+};
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
+
 module.exports = { app, server };
 

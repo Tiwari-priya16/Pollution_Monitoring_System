@@ -11,6 +11,7 @@ export default function Navbar() {
     { name: 'Categories', href: '/#categories' },
     { name: 'How It Works', href: '/#how-it-works' },
     { name: 'Benefits', href: '/#benefits' },
+    { name: 'System Status', href: '/#system-status' },
   ];
 
   return (

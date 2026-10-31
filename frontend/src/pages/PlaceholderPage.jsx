@@ -15,7 +15,7 @@ export default function PlaceholderPage({ type = 'login' }) {
         
         {/* Icon & Stage Badge */}
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 rounded-2xl bg-forest-50 border border-forest-200 flex items-center justify-center text-forest-700 mb-4 shadow-xs">
+          <div className="w-16 h-16 rounded-2xl bg-forest-50 border border-forest-200 flex items-center justify-center text-forest-700 mb-4 shadow-sm">
             <Lock className="w-8 h-8" />
           </div>
           <span className="text-xs font-bold uppercase tracking-wider text-forest-700 bg-forest-100 px-3 py-1 rounded-full border border-forest-200">

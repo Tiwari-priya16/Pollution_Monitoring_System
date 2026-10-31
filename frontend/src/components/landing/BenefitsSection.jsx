@@ -69,7 +69,7 @@ export default function BenefitsSection() {
               >
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-white shadow-xs border border-slate-200 flex items-center justify-center text-slate-800">
+                    <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-800">
                       <Icon className="w-6 h-6 text-forest-600" />
                     </div>
                     <div>

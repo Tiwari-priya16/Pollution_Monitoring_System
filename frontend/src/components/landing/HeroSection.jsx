@@ -14,7 +14,7 @@ export default function HeroSection() {
         
         {/* Environmental Badge */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-100 border border-forest-200 text-forest-800 text-xs sm:text-sm font-semibold shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-100 border border-forest-200 text-forest-800 text-xs sm:text-sm font-semibold shadow-sm">
             <Sparkles className="w-4 h-4 text-forest-600" />
             <span>Digital Environmental Grievance & Resolution Platform</span>
           </div>
@@ -45,7 +45,7 @@ export default function HeroSection() {
 
             <a
               href="#categories"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 shadow-xs hover:shadow-sm transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm hover:shadow transition-all"
             >
               Explore Categories
             </a>
@@ -53,7 +53,7 @@ export default function HeroSection() {
 
           {/* Trust Highlights */}
           <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
-            <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center gap-3">
               <div className="p-2 rounded-lg bg-forest-100 text-forest-700">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
@@ -63,7 +63,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center gap-3">
               <div className="p-2 rounded-lg bg-blue-100 text-blue-700">
                 <ShieldCheck className="w-5 h-5" />
               </div>
@@ -73,7 +73,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center gap-3">
               <div className="p-2 rounded-lg bg-amber-100 text-amber-700">
                 <AlertCircle className="w-5 h-5" />
               </div>
@@ -83,7 +83,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center gap-3">
               <div className="p-2 rounded-lg bg-purple-100 text-purple-700">
                 <FileText className="w-5 h-5" />
               </div>

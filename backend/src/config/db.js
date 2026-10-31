@@ -7,6 +7,37 @@ let connectionState = {
   error: null
 };
 
+// Register real-time Mongoose connection events
+mongoose.connection.on('connected', () => {
+  connectionState = {
+    status: 'connected',
+    host: mongoose.connection.host,
+    database: mongoose.connection.name,
+    error: null
+  };
+  console.log(`[Database Event] Mongoose connected to ${mongoose.connection.host}/${mongoose.connection.name}`);
+});
+
+mongoose.connection.on('disconnected', () => {
+  connectionState = {
+    status: 'disconnected',
+    host: null,
+    database: null,
+    error: connectionState.error || 'Connection closed'
+  };
+  console.log('[Database Event] Mongoose disconnected.');
+});
+
+mongoose.connection.on('error', (err) => {
+  connectionState = {
+    status: 'disconnected',
+    host: null,
+    database: null,
+    error: err.message
+  };
+  console.warn(`[Database Event] Mongoose error: ${err.message}`);
+});
+
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pollution_monitoring_db';
   
@@ -39,7 +70,7 @@ const connectDB = async () => {
 };
 
 const getDBStatus = () => {
-  // Check live mongoose state if available
+  // Check live mongoose readyState
   const readyStates = {
     0: 'disconnected',
     1: 'connected',

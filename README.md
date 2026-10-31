@@ -88,6 +88,14 @@ c:/SE_Project/
 5. Test API health status:
    Visit [http://localhost:5000/api/health](http://localhost:5000/api/health)
 
+#### Port Conflict Resolution:
+If port 5000 is occupied by another process (`EADDRINUSE`):
+- **Option A**: Change the port by setting `PORT=5001` in `backend/.env`, and update `VITE_API_BASE_URL=http://localhost:5001/api` in `frontend/.env`.
+- **Option B**: Free up port 5000 in PowerShell:
+  ```powershell
+  Stop-Process -Id (Get-NetTCPConnection -LocalPort 5000).OwningProcess -Force
+  ```
+
 ---
 
 ### 2. Frontend Setup
