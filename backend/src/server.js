@@ -11,6 +11,7 @@ const { connectDB } = require('./config/db');
 const { notFoundHandler, errorHandler } = require('./middleware/errorMiddleware');
 const healthRoutes = require('./routes/healthRoutes');
 const authRoutes = require('./routes/authRoutes');
+const complaintRoutes = require('./routes/complaintRoutes');
 
 // Initialize Express App
 const app = express();
@@ -57,6 +58,7 @@ app.get('/', (req, res) => {
 // Mount Routes
 app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/complaints', complaintRoutes);
 
 // Centralized Error Handling
 app.use(notFoundHandler);

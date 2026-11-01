@@ -31,3 +31,4 @@ router.get('/test/admin', protect, authorize('admin'), (req, res) => {
 });
 
 module.exports = router;
+

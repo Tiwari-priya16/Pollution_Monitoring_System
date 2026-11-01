@@ -47,3 +47,4 @@ const sendTokenResponse = (user, statusCode, res, message = 'Authentication succ
 };
 
 module.exports = { generateToken, sendTokenResponse };
+

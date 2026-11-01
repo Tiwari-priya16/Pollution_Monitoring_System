@@ -6,6 +6,9 @@ import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import ProtectedRoute from '../components/common/ProtectedRoute';
 import CitizenDashboard from '../pages/citizen/CitizenDashboard';
+import ReportComplaint from '../pages/citizen/ReportComplaint';
+import MyComplaints from '../pages/citizen/MyComplaints';
+import ComplaintDetail from '../pages/citizen/ComplaintDetail';
 import OfficerDashboard from '../pages/officer/OfficerDashboard';
 import AdminDashboard from '../pages/admin/AdminDashboard';
 
@@ -18,16 +21,41 @@ export default function AppRoutes() {
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
 
-        {/* Protected Role-Based Routes */}
+        {/* Citizen Routes */}
         <Route
           path="citizen/dashboard"
           element={
-            <ProtectedRoute allowedRoles={['citizen', 'officer', 'admin']}>
+            <ProtectedRoute allowedRoles={['citizen']}>
               <CitizenDashboard />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="citizen/report"
+          element={
+            <ProtectedRoute allowedRoles={['citizen']}>
+              <ReportComplaint />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="citizen/complaints"
+          element={
+            <ProtectedRoute allowedRoles={['citizen']}>
+              <MyComplaints />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="citizen/complaints/:complaintId"
+          element={
+            <ProtectedRoute allowedRoles={['citizen']}>
+              <ComplaintDetail />
+            </ProtectedRoute>
+          }
+        />
 
+        {/* Officer Routes */}
         <Route
           path="officer/dashboard"
           element={
@@ -37,6 +65,7 @@ export default function AppRoutes() {
           }
         />
 
+        {/* Admin Routes */}
         <Route
           path="admin/dashboard"
           element={
@@ -52,4 +81,3 @@ export default function AppRoutes() {
     </Routes>
   );
 }
-
