@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ShieldCheck, Menu, X, Leaf, Activity } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { ShieldCheck, Menu, X, Leaf, Activity, LogOut, User, LayoutDashboard } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -13,6 +16,19 @@ export default function Navbar() {
     { name: 'Benefits', href: '/#benefits' },
     { name: 'System Status', href: '/#system-status' },
   ];
+
+  const dashboardPath =
+    user?.role === 'admin'
+      ? '/admin/dashboard'
+      : user?.role === 'officer'
+      ? '/officer/dashboard'
+      : '/citizen/dashboard';
+
+  const handleLogout = async () => {
+    await logout();
+    setMobileMenuOpen(false);
+    navigate('/');
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
@@ -47,18 +63,44 @@ export default function Navbar() {
 
           {/* Auth Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-sm font-semibold text-slate-700 hover:text-forest-700 px-4 py-2 rounded-lg transition-colors"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/register"
-              className="text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 px-5 py-2.5 rounded-lg shadow-sm shadow-forest-600/30 hover:shadow-md hover:shadow-forest-600/40 transition-all transform active:scale-95"
-            >
-              Get Started
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-3">
+                <Link
+                  to={dashboardPath}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-forest-700 bg-slate-100 hover:bg-slate-200/80 px-4 py-2 rounded-xl transition-all"
+                >
+                  <LayoutDashboard className="w-4 h-4 text-forest-600" />
+                  <span>Dashboard</span>
+                  <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-white text-slate-600 border border-slate-200">
+                    {user?.role}
+                  </span>
+                </Link>
+
+                <button
+                  onClick={handleLogout}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-rose-700 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 px-3.5 py-2 rounded-xl transition-colors border border-rose-200/60"
+                  title="Sign out of your session"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-sm font-semibold text-slate-700 hover:text-forest-700 px-4 py-2 rounded-lg transition-colors"
+                >
+                  Log in
+                </Link>
+                <Link
+                  to="/register"
+                  className="text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 px-5 py-2.5 rounded-lg shadow-sm shadow-forest-600/30 hover:shadow-md hover:shadow-forest-600/40 transition-all transform active:scale-95"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -90,25 +132,53 @@ export default function Navbar() {
               </a>
             ))}
           </div>
+
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
-            <Link
-              to="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/register"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 rounded-lg shadow-sm"
-            >
-              Get Started
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <div className="px-3 py-2 bg-slate-50 rounded-xl flex items-center justify-between mb-1">
+                  <span className="text-sm font-semibold text-slate-800">{user?.name}</span>
+                  <span className="text-xs uppercase font-bold px-2 py-0.5 rounded-full bg-forest-100 text-forest-800">
+                    {user?.role}
+                  </span>
+                </div>
+                <Link
+                  to={dashboardPath}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 rounded-lg shadow-sm"
+                >
+                  Go to Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-rose-700 hover:bg-rose-50 rounded-lg border border-rose-200"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-slate-700 hover:bg-slate-100 rounded-lg"
+                >
+                  Log in
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 rounded-lg shadow-sm"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
     </header>
   );
 }
+
 

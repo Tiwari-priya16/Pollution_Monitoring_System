@@ -40,11 +40,13 @@ mongoose.connection.on('error', (err) => {
 
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pollution_monitoring_db';
+  const isAtlas = uri.includes('mongodb+srv');
+  const timeoutMs = isAtlas ? 15000 : 5000;
   
   try {
     connectionState.status = 'connecting';
     const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 4000 // Prevents hanging if local DB daemon is not running
+      serverSelectionTimeoutMS: timeoutMs
     });
 
     connectionState = {

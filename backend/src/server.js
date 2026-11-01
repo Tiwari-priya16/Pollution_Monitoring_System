@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
 // Load environment variables
@@ -9,6 +10,7 @@ dotenv.config();
 const { connectDB } = require('./config/db');
 const { notFoundHandler, errorHandler } = require('./middleware/errorMiddleware');
 const healthRoutes = require('./routes/healthRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Initialize Express App
 const app = express();
@@ -35,9 +37,10 @@ app.use(cors({
   credentials: true
 }));
 
-// Middleware: Body Parsers
+// Middleware: Body Parsers & Cookies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Static uploads directory (for Stage 3 evidence pictures)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -53,6 +56,7 @@ app.get('/', (req, res) => {
 
 // Mount Routes
 app.use('/api', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 // Centralized Error Handling
 app.use(notFoundHandler);
