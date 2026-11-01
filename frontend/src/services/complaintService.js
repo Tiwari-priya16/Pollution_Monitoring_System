@@ -32,3 +32,4 @@ export const getComplaintById = async (complaintId) => {
   const response = await api.get(`/complaints/${complaintId}`);
   return response.data;
 };
+

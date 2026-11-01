@@ -56,3 +56,4 @@ export const categoryIcon = (category) => {
   };
   return map[category] || '🌍';
 };
+

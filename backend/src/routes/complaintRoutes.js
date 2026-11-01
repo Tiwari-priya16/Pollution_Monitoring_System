@@ -42,3 +42,4 @@ router.post(
 router.get('/:complaintId', protect, authorize('citizen'), getComplaintById);
 
 module.exports = router;
+

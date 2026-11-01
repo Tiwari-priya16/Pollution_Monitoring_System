@@ -201,3 +201,4 @@ const getComplaintById = async (req, res, next) => {
 };
 
 module.exports = { submitComplaint, getMyComplaints, getComplaintById };
+

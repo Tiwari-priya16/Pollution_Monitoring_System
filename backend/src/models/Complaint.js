@@ -123,3 +123,4 @@ const complaintSchema = new Schema(
 );
 
 module.exports = mongoose.model('Complaint', complaintSchema);
+

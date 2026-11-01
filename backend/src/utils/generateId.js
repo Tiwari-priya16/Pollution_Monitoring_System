@@ -25,3 +25,4 @@ async function generateComplaintId(maxRetries = 10) {
 }
 
 module.exports = { generateComplaintId };
+
